@@ -44,11 +44,27 @@ class TakeRandomNote():
         with open("todoList.txt", "r") as f:
             allText = f.read()
             words = list(map(str, allText.split()))
-            print("The drawn note is: " + random.choice(words))
-            f.close()
+            drawline = random.choice(words)
+            print("The drawn note is: " + drawline)
+
+        input_answer = input("Delete the drawn note?(yes or no): ")
+        if (str.upper(input_answer) == "YES"):
+            
+            with open("todoList.txt", "r") as f:
+                lines = f.readlines()
+                
+            with open("todoList.txt", "w") as f:
+                for line in lines:
+                    
+                    if line.strip("\n") != drawline:
+                        f.write(line)
+        elif (str.upper(input_answer) == "NO"):
+            pass
+        else:
+            print("wrong answer, next time enter 'yes' or 'no'")
 try:
-    obj = Welcome()
-    obj.hello()
+    #obj = Welcome()
+    #obj.hello()
     #obj2 = Todo()
     #obj2.addNote()
     obj3 = ShowAllNotes()
