@@ -8,7 +8,7 @@ class Todo:
             f.write(input("create a new note: ")+"\n")
         f.close()
         
-class Welcome():
+
     def hello(self):
         print("Welcome to the todo list\n"
         +"Show all notes: select 1\n"
@@ -16,7 +16,7 @@ class Welcome():
         +"Delete note with particural number: select 3\n"
         +"Draw a note: select 4\n")
 
-class ShowAllNotes():
+
     def doList(self):
     
         index = 1
@@ -27,7 +27,7 @@ class ShowAllNotes():
                 print(str(index) + ") " +line)
                 index = index + 1 
         
-class DeleteNote():
+
     def deteleCreatedNote(self):
         input_del = int(input("Provide numer of the note to be deleted: "))
         with open("todoList.txt", "r") as f:
@@ -39,7 +39,7 @@ class DeleteNote():
                 f.write(line)
             f.close()
 
-class TakeRandomNote():
+
     def drawNote(self):
         with open("todoList.txt", "r") as f:
             allText = f.read()
@@ -64,15 +64,15 @@ class TakeRandomNote():
             print("wrong answer, next time enter 'yes' or 'no'")
 try:
     #obj = Welcome()
-    #obj.hello()
-    #obj2 = Todo()
-    #obj2.addNote()
-    obj3 = ShowAllNotes()
-    obj3.doList()
+    obj = Todo()
+    obj.hello()
+    obj.addNote()
+    #obj3 = ShowAllNotes()
+    obj.doList()
     #obj4 = DeleteNote()
-    #obj4.deteleCreatedNote()
-    obj5 = TakeRandomNote()
-    obj5.drawNote()
+    obj.deteleCreatedNote()
+    #obj5 = TakeRandomNote()
+    obj.drawNote()
 except IndexError:
     print("There is no note with such number")
 except Exception as exc:
