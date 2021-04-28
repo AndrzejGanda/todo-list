@@ -1,17 +1,11 @@
 import errno
 class Todo:
     def addNote(self):
-        try:
-            with open("todoList.txt", "a") as f:
-                f.write(input("Add to list: ")+"\n")
-            f.close()
-        except Exception as exc:
-            if exc.errno == errno.ENOENT:
-                print("The file doesn't exist.")
-            elif exc.errno == errno.EMFILE:
-                print("You've opened too many files.")
-            else:
-                print("The error number is:", exc.errno)
+        
+        with open("todoList.txt", "a") as f:
+            f.write(input("create a new note: ")+"\n")
+        f.close()
+        
 class Welcome():
     def hello(self):
         print("Welcome to the todo list\n"
@@ -22,23 +16,40 @@ class Welcome():
 
 class ShowAllNotes():
     def doList(self):
-        try:
-            index = 1
-            with open("todoList.txt", "r") as f:
-                for line in f:
-                    line = line.strip()
-                    print(str(index) + ") " +line)
-                    index = index + 1 
-        except Exception as exc:
-            if exc.errno == errno.ENOENT:
-                print("The file doesn't exist.")
-            elif exc.errno == errno.EMFILE:
-                print("You've opened too many files.")
-            else:
-                print("The error number is:", exc.errno)
-#obj = Welcome()
-#obj.hello()
-#obj2 = Todo()
-#obj2.addNote()
-obj3 = ShowAllNotes()
-obj3.doList()
+    
+        index = 1
+        with open("todoList.txt", "r") as f:
+            for line in f:
+                line = line.strip()
+                print(str(index) + ") " +line)
+                index = index + 1 
+        
+class DeleteNote():
+    def deteleCreatedNote(self):
+        input_del = int(input("Provide numer of the note to be deleted: "))
+        with open("todoList.txt", "r") as f:
+            lines = f.readlines()
+            f.close()
+            del lines[input_del-1]
+        with open("todoList.txt", "w+") as f:
+            for line in lines:
+                f.write(line)
+            f.close()
+try:
+    obj = Welcome()
+    obj.hello()
+    obj2 = Todo()
+    obj2.addNote()
+    obj3 = ShowAllNotes()
+    obj3.doList()
+    obj4 = DeleteNote()
+    obj4.deteleCreatedNote()
+except IndexError:
+    print("There is no note with such number")
+except Exception as exc:
+    if exc.errno == errno.ENOENT:
+        print("The file doesn't exist.")
+    elif exc.errno == errno.EMFILE:
+        print("You've opened too many files.")
+    else:
+        print("The error number is:", exc.errno)
