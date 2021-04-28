@@ -19,8 +19,26 @@ class Welcome():
         +"Add new note: select 2\n"
         +"Delete note with particural number: select 3\n"
         +"Draw a note: select 4\n")
-    
-obj = Welcome()
-obj.hello()
-obj2 = Todo()
-obj2.addNote()
+
+class ShowAllNotes():
+    def doList(self):
+        try:
+            index = 1
+            with open("todoList.txt", "r") as f:
+                for line in f:
+                    line = line.strip()
+                    print(str(index) + ") " +line)
+                    index = index + 1 
+        except Exception as exc:
+            if exc.errno == errno.ENOENT:
+                print("The file doesn't exist.")
+            elif exc.errno == errno.EMFILE:
+                print("You've opened too many files.")
+            else:
+                print("The error number is:", exc.errno)
+#obj = Welcome()
+#obj.hello()
+#obj2 = Todo()
+#obj2.addNote()
+obj3 = ShowAllNotes()
+obj3.doList()
