@@ -1,4 +1,6 @@
 import errno
+import random
+
 class Todo:
     def addNote(self):
         
@@ -19,6 +21,7 @@ class ShowAllNotes():
     
         index = 1
         with open("todoList.txt", "r") as f:
+            print("Your notes:")
             for line in f:
                 line = line.strip()
                 print(str(index) + ") " +line)
@@ -35,15 +38,25 @@ class DeleteNote():
             for line in lines:
                 f.write(line)
             f.close()
+
+class TakeRandomNote():
+    def drawNote(self):
+        with open("todoList.txt", "r") as f:
+            allText = f.read()
+            words = list(map(str, allText.split()))
+            print("The drawn note is: " + random.choice(words))
+            f.close()
 try:
     obj = Welcome()
     obj.hello()
-    obj2 = Todo()
-    obj2.addNote()
+    #obj2 = Todo()
+    #obj2.addNote()
     obj3 = ShowAllNotes()
     obj3.doList()
-    obj4 = DeleteNote()
-    obj4.deteleCreatedNote()
+    #obj4 = DeleteNote()
+    #obj4.deteleCreatedNote()
+    obj5 = TakeRandomNote()
+    obj5.drawNote()
 except IndexError:
     print("There is no note with such number")
 except Exception as exc:
