@@ -1,7 +1,9 @@
 import time
 
-class AddLog:
-    def addNoteLog(lognote):
+class Log:
+    def __init__(self, path):
+        self.path = path
+    def addNoteLog(self, lognote):
         timestamp = time.time()
         info = " [INFO] "
         if lognote == 0:
@@ -17,10 +19,10 @@ class AddLog:
         else: 
             info = " [ERROR] "
             note = "Adding new task to list has failed. No storage file was found."
-            with open("todoListLog.txt", "a") as f:
+            with open(path, "a") as f:
                 f.write(str(timestamp) + info + note +"\n")
                 return
-        with open("todoListLog.txt", "a") as f:
+        with open(self.path, "a") as f:
             f.write(time.strftime("%Y-%B-%d %H:%M:%S") + info + note +"\n")
         f.close()
         

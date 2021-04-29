@@ -1,22 +1,34 @@
 import errno
 import random
-from todolog import AddLog
+from todolog import Log
 
 class Todo:
+    objLog = Log("todoListLog.txt")
     def addNote(self):
         
         with open("todoList.txt", "a") as f:
             f.write(input("create a new note: ")+"\n")
         f.close()
-        AddLog.addNoteLog(lognote=1)
+        self.objLog.addNoteLog(lognote=1)
 
     def hello(self):
         print("Welcome to the todo list\n"
-        +"Show all notes: select 1\n"
-        +"Add new note: select 2\n"
-        +"Delete note with particural number: select 3\n"
-        +"Draw a note: select 4\n")
-        AddLog.addNoteLog(lognote=4)
+        +"1) Show all notes: select 1\n"
+        +"2) Add new note: select 2\n"
+        +"3) Delete note with particural number: select 3\n"
+        +"4) Draw a note: select 4\n")
+        self.objLog.addNoteLog(lognote=4)
+        input_menu = int(input("Select the option by typing the number: "))
+        if input_menu == 1:
+            obj.doList()
+        elif input_menu == 2:
+            obj.addNote()
+        elif input_menu == 3:
+            obj.deteleCreatedNote()
+        elif input_menu == 4:
+            obj.drawNote()
+        else:
+            print("Wrong number, try again")
 
     def doList(self):
     
@@ -27,7 +39,7 @@ class Todo:
                 line = line.strip()
                 print(str(index) + ") " +line)
                 index = index + 1 
-        AddLog.addNoteLog(lognote=0)
+        self.objLog.addNoteLog(lognote=0)
         
 
     def deteleCreatedNote(self):
@@ -40,7 +52,7 @@ class Todo:
             for line in lines:
                 f.write(line)
             f.close()
-        AddLog.addNoteLog(lognote=2)
+        self.objLog.addNoteLog(lognote=2)
 
     def drawNote(self):
         with open("todoList.txt", "r") as f:
@@ -50,7 +62,7 @@ class Todo:
             allText = f.readlines()
             drawline = random.choice(allText)
             print("The drawn note is: " + drawline)
-        AddLog.addNoteLog(lognote=3)
+        self.objLog.addNoteLog(lognote=3)
         
         input_answer = input("Delete the drawn note?(yes or no): ")
         if (str.upper(input_answer) == "YES"):
@@ -62,7 +74,7 @@ class Todo:
                     
                     if line != drawline:
                         f.write(line)
-            AddLog.addNoteLog(lognote=2)
+            self.objLog.addNoteLog(lognote=2)
         elif (str.upper(input_answer) == "NO"):
             pass
         else:
@@ -71,11 +83,8 @@ try:
     
     obj = Todo()
     obj.hello()
-    obj.addNote()  
-    obj.doList()  
-    #obj.deteleCreatedNote()  
-    obj.drawNote()
-    
+except ValueError:
+    print("Only digites allowed")
 except IndexError:
     print("There is no note with such number")
 except Exception as exc:
