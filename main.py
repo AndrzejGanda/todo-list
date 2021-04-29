@@ -44,23 +44,23 @@ class Todo:
 
     def drawNote(self):
         with open("todoList.txt", "r") as f:
-            allText = f.read()
-            words = list(map(str, allText.split()))
-            drawline = random.choice(words)
+            #allText = f.read()
+            #words = list(map(str, allText.split()))
+            #drawline = random.choice(words)
+            allText = f.readlines()
+            drawline = random.choice(allText)
             print("The drawn note is: " + drawline)
-        f.close()
         AddLog.addNoteLog(lognote=3)
-
+        
         input_answer = input("Delete the drawn note?(yes or no): ")
         if (str.upper(input_answer) == "YES"):
             
             with open("todoList.txt", "r") as f:
                 lines = f.readlines()
-                
             with open("todoList.txt", "w") as f:
                 for line in lines:
                     
-                    if line.strip("\n") != drawline:
+                    if line != drawline:
                         f.write(line)
             AddLog.addNoteLog(lognote=2)
         elif (str.upper(input_answer) == "NO"):
@@ -73,7 +73,7 @@ try:
     obj.hello()
     obj.addNote()  
     obj.doList()  
-    obj.deteleCreatedNote()  
+    #obj.deteleCreatedNote()  
     obj.drawNote()
     
 except IndexError:
