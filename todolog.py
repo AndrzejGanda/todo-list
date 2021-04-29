@@ -12,6 +12,8 @@ class AddLog:
             note = "Note deleted from the list"
         elif lognote == 3:
             note = "Note drawn"
+        elif lognote == 4:
+            note = "Aplication starts"
         else: 
             info = " [ERROR] "
             note = "Adding new task to list has failed. No storage file was found."

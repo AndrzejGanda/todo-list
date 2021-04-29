@@ -16,7 +16,7 @@ class Todo:
         +"Add new note: select 2\n"
         +"Delete note with particural number: select 3\n"
         +"Draw a note: select 4\n")
-
+        AddLog.addNoteLog(lognote=4)
 
     def doList(self):
     
