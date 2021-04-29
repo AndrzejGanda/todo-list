@@ -1,7 +1,7 @@
 import time
 
 class AddLog:
-    def addNote(self, lognote):
+    def addNoteLog(lognote):
         timestamp = time.time()
         info = " [INFO] "
         if lognote == 0:
@@ -23,6 +23,3 @@ class AddLog:
         f.close()
         
 
-hej = 4
-obj = AddLog()
-obj.addNote(hej)

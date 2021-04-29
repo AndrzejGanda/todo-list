@@ -1,5 +1,6 @@
 import errno
 import random
+from todolog import AddLog
 
 class Todo:
     def addNote(self):
@@ -7,7 +8,7 @@ class Todo:
         with open("todoList.txt", "a") as f:
             f.write(input("create a new note: ")+"\n")
         f.close()
-        
+        AddLog.addNoteLog(lognote=1)
 
     def hello(self):
         print("Welcome to the todo list\n"
@@ -26,6 +27,7 @@ class Todo:
                 line = line.strip()
                 print(str(index) + ") " +line)
                 index = index + 1 
+        AddLog.addNoteLog(lognote=0)
         
 
     def deteleCreatedNote(self):
@@ -38,7 +40,7 @@ class Todo:
             for line in lines:
                 f.write(line)
             f.close()
-
+        AddLog.addNoteLog(lognote=2)
 
     def drawNote(self):
         with open("todoList.txt", "r") as f:
@@ -46,6 +48,8 @@ class Todo:
             words = list(map(str, allText.split()))
             drawline = random.choice(words)
             print("The drawn note is: " + drawline)
+        f.close()
+        AddLog.addNoteLog(lognote=3)
 
         input_answer = input("Delete the drawn note?(yes or no): ")
         if (str.upper(input_answer) == "YES"):
@@ -58,21 +62,20 @@ class Todo:
                     
                     if line.strip("\n") != drawline:
                         f.write(line)
+            AddLog.addNoteLog(lognote=2)
         elif (str.upper(input_answer) == "NO"):
             pass
         else:
             print("wrong answer, next time enter 'yes' or 'no'")
 try:
-    #obj = Welcome()
+    
     obj = Todo()
     obj.hello()
-    obj.addNote()
-    #obj3 = ShowAllNotes()
-    obj.doList()
-    #obj4 = DeleteNote()
-    obj.deteleCreatedNote()
-    #obj5 = TakeRandomNote()
+    obj.addNote()  
+    obj.doList()  
+    obj.deteleCreatedNote()  
     obj.drawNote()
+    
 except IndexError:
     print("There is no note with such number")
 except Exception as exc:
