@@ -2,7 +2,7 @@ import errno
 import random
 from todolog import Log
 
-class Todo:
+class Todo(BaseException):
     objLog = Log("todoListLog.txt")
     def addNote(self):
         
@@ -12,23 +12,28 @@ class Todo:
         self.objLog.addNoteLog(lognote=1)
 
     def hello(self):
-        print("Welcome to the todo list\n"
-        +"1) Show all notes: select 1\n"
-        +"2) Add new note: select 2\n"
-        +"3) Delete note with particural number: select 3\n"
-        +"4) Draw a note: select 4\n")
         self.objLog.addNoteLog(lognote=4)
-        input_menu = int(input("Select the option by typing the number: "))
-        if input_menu == 1:
-            obj.doList()
-        elif input_menu == 2:
-            obj.addNote()
-        elif input_menu == 3:
-            obj.deteleCreatedNote()
-        elif input_menu == 4:
-            obj.drawNote()
-        else:
-            print("Wrong number, try again")
+        loop = True
+        while loop == True:
+            print("\nWelcome to the todo list\n"
+            +"1) Show all notes: select 1\n"
+            +"2) Add new note: select 2\n"
+            +"3) Delete note with particural number: select 3\n"
+            +"4) Draw a note: select 4\n"
+            +"5) EXIT\n")
+            input_menu = int(input("Select the option by typing the number: "))
+            if input_menu == 1:
+                obj.doList()
+            elif input_menu == 2:
+                obj.addNote()
+            elif input_menu == 3:
+                obj.deteleCreatedNote()
+            elif input_menu == 4:
+                obj.drawNote()
+            elif input_menu == 5:
+                raise Todo
+            else:
+                print("Wrong number, try again")
 
     def doList(self):
     
@@ -79,10 +84,19 @@ class Todo:
             pass
         else:
             print("wrong answer, next time enter 'yes' or 'no'")
+
+    def say_goodbye(self):
+        print("Thank you for using our program. Be safe and have a nice day!")
+        self.objLog.addNoteLog(lognote=5)
+
+
+
 try:
     
     obj = Todo()
     obj.hello()
+except Todo:
+    obj.say_goodbye()
 except ValueError:
     print("Only digites allowed")
 except IndexError:

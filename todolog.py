@@ -15,7 +15,9 @@ class Log:
         elif lognote == 3:
             note = "Note drawn"
         elif lognote == 4:
-            note = "Aplication starts"
+            note = "Application starts"
+        elif lognote == 5:
+            note = "Application finished"
         else: 
             info = " [ERROR] "
             note = "Adding new task to list has failed. No storage file was found."
