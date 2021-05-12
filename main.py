@@ -90,7 +90,6 @@ class Todo(BaseException):
         self.objLog.addNoteLog(lognote=5)
 
 
-
 try:
     
     obj = Todo()
